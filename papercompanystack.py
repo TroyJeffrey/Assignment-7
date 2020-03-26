@@ -8,7 +8,6 @@ from stack import Stack
 total_inventory_qty = 0
 total_profit = 0.0
 total_value_sold = 0.0
-# Need 2 Stacks to keep track of qty and price
 inventory_system_qty= Stack()
 inventory_system_price = Stack()
 choice = 0
