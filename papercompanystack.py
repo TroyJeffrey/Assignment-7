@@ -1,4 +1,4 @@
-# Troy Amegashie
+# Troy Jeffrey Amegashie
 # Assignment 7 - Stacks and Queues
 # 03/15/2020
 
