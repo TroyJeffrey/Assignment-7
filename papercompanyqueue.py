@@ -7,8 +7,8 @@ from queue import Queue
 total_inventory_qty = 0
 total_profit = 0.0
 total_value_sold = 0.0
-# Need 2 Stacks to keep track of qty and price
-inventory_system_qty= Queue()
+
+inventory_system_qty = Queue()
 inventory_system_price = Queue()
 choice = 0
 
@@ -22,14 +22,11 @@ while choice != 5:
     choice = int(input(">"))
 
     if choice == 1:
-        # get the qty and price, push them onto the Stacks
         qty = int(input("How many are you adding?"))
         price = float(input("How much does each cost?"))
         inventory_system_qty.push(qty)
         inventory_system_price.push(price)
         print("Added to inventory. \n\n")
-
-        # Keep the running total
         total_inventory_qty += qty
 
     elif choice == 2:
@@ -41,30 +38,23 @@ while choice != 5:
         else:
             total_popped = 0
             total_sale = 0.0
-
-            # These next 5 lines are the key to keeping track of where you are
             qty_popped = inventory_system_qty.pop()
             total_inventory_qty -= qty_popped
             price = inventory_system_price.pop()
             total_sale += (qty_popped * price)
             total_popped += qty_popped
-            # Keep popping until we have enough
             while total_popped < qty_needed:
                 qty_popped = inventory_system_qty.pop()
                 total_inventory_qty -= qty_popped
                 price = inventory_system_price.pop()
                 total_sale += (qty_popped * price)
                 total_popped += qty_popped
-
-            # We should have popped enough, but did we pop too many?  Push the extra back on.
             if total_popped > qty_needed:
                 overage = total_popped - qty_needed
                 inventory_system_qty.push(overage)
                 inventory_system_price.push(price)
                 total_inventory_qty += overage
                 total_sale -=(overage * price)
-
-            # Let's calculate the profit on what we are selling and keep track of it
             total_value_sold += total_sale
             total_profit += (total_sale * .1)
         print(f"You have successfully filled the order for {qty_needed}\n")
